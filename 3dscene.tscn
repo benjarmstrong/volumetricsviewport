@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/silicon.vfx.volumetrics/volume_proxy.gd" type="Script" id=1]
+[ext_resource path="res://addons/silicon.vfx.volumetrics/volumetric_fog.gd" type="Script" id=2]
+
+[sub_resource type="SphereMesh" id=1]
+
+[node name="3DScene" type="Spatial"]
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.42322 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.22763, 0, -2.90685 )
+mesh = SubResource( 1 )
+material/0 = null
+__meta__ = {
+"_vol_id": 8,
+"apply_volumetrics": false
+}
+
+[node name="VolumetricFog" type="Node" parent="."]
+script = ExtResource( 2 )
+start = 0.1
+end = 100.0
+tile_size = 2
+samples = 1
+distribution = 0.9
+temporal_blending = 0.95
+volumetric_shadows = false
+shadow_atlas_size = 1024
+ambient_light_color = Color( 0, 0, 0, 1 )
+ambient_light_energy = 1.0
+cull_mask = 1048575
+
+[node name="VolumeProxy" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19108, 0, -2.64991 )
+script = ExtResource( 1 )
+material = null
+bounds_mode = 1
+extents = Vector3( 1, 1, 1 )
+bounds_fade = Vector3( 0, 0, 0 )
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.0692515, -0.997599, 0, 0.997599, 0.0692515, 0, -1.09537, -2.57391 )
+__meta__ = {
+"_vol_id": 10,
+"volumetric": 1.0
+}
